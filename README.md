@@ -9,7 +9,7 @@ currency, create offers for currencies and view chart for the currency.
 Node.js, Express, Angular2Beta, MongoDb, Mongoose
 
 ##Future development
-*supporting unlimited number of currencies.
-*add action history(buy,sell,creating offer)
-*add delete offer method
-*improve chart visualizations and data sets
+* supporting unlimited number of currencies.
+* add action history(buy,sell,creating offer)
+* add delete offer method
+* improve chart visualizations and data sets
