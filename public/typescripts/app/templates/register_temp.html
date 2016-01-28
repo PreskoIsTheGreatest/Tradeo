@@ -1,0 +1,47 @@
+<div class="modal-content">
+    <form>
+        <div class="modal-header" style="align-content: center;text-align: center;">
+            <h1 style="position: inherit;">Регистрация</h1>
+            <button type="button" class="close" data-dismiss="modal">
+                <span (click)="reset();" aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body" style="left:25%;width:50%">
+            <div id="logoContainer"></div>
+            <div>
+                <div>
+                    <div [hidden]="isNotOpenSuccess" class="alert alert-success" style="margin-top:2%;">
+                        <button (click)="isNotOpenSuccess=true" type="button" class="close">×</button>
+                        Успешен запис!
+                    </div>
+                    <div class="input-group" style="width: 100%">
+                        <label>Потребителско име</label>
+                        <input [(ngModel)]="username" class="form-control" type="text" name="username"
+                               aria-describedby="basic-addon2" required/>
+                    </div>
+                    <div [hidden]="isNotOpenUserExist" class="alert alert-danger" style="margin-top:2%;">
+                        <button (click)="isNotOpenUserExist=true" type="button" class="close">×</button>
+                        Пoтребителското име вече съществува!
+                    </div>
+                    <div class="input-group" style="width: 100%">
+                        <label>Парола</label>
+                        <input #password class="form-control" type="password" required/>
+                    </div>
+                    <div class="input-group" style="width: 100%">
+                        <label>Повтори парола</label>
+                        <input #conf_password class="form-control" type="password" required/>
+                    </div>
+                    <div [hidden]="isNotOpenPassNotMatch" class="alert alert-danger" style="margin-top:2%;">
+                        <button (click)="isNotOpenPassNotMatch=true" type="button" class="close">×</button>
+                        Паролите не съвпадат!
+                    </div>
+                    <div style="width:100%!important;margin-top: 2%;">
+                        <input (click)="register(password,conf_password);"
+                               class="btn btn-info" type="button"
+                               value="Регистрирация"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

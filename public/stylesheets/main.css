@@ -1,0 +1,25 @@
+.centered {
+    position: fixed;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.topped {
+    position: fixed;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#logoContainer {
+    background: url("/images/logo.png") no-repeat center;
+    width: 400px;
+    height: 123px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

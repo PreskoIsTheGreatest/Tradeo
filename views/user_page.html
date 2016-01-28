@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+<body>
+<div class="tab-content"  style="margin-left: 30%;width: 50%;">
+    <div id="logoContainer"></div>
+    <user-view>LOADING</user-view>
+</div>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="javascripts/jquery-2.1.3.min.js"></script>
+<script src="javascripts/draw_charts.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+<script src="node_modules/systemjs/dist/system.src.js"></script>
+<script src="node_modules/rxjs/bundles/Rx.js"></script>
+<script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+<script src="node_modules/angular2/bundles/http.js"></script>
+<script src="node_modules/angular2/bundles/router.dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script>
+    System.config({
+        packages: {'typescripts': {defaultExtension: 'js'}}
+    });
+    System.import('typescripts/app/user/user_navigation').then(null, console.error.bind(console));
+</script>
+
+</body>
+</html>

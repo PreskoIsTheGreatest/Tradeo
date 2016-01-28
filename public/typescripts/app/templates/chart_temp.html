@@ -1,0 +1,31 @@
+<form>
+    <div>
+        <div class="input-group" style="width: 70%">
+            <div>
+                <label>ТИП</label>
+                <select id="filter_type" class="form-control">
+                    <option>BUY</option>
+                    <option>SELL</option>
+                </select>
+            </div>
+            <div>
+                <label>ВАЛУТА</label>
+                <select id="filter_name" class="form-control">
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+            </div>
+            <div>
+                <label>ПЕРИОД</label>
+                <select id="filter_period" class="form-control">
+                    <option value="1">По часове </option>
+                    <option value="2">Дни</option>
+                    <option value="3">Седмици</option>
+                    <option value="4">Месеци</option>
+                </select>
+            </div>
+            <button onclick="loadChartFromData();" class="btn btn-info" >Зареди</button>
+        </div>
+        <div id="chart_div" style="width: 500px; height: 450px;"></div>
+    </div>
+</form>

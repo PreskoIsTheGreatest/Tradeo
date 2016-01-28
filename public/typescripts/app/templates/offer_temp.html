@@ -1,0 +1,67 @@
+<form>
+    <div>
+        <div class="input-group" style="width: 70%">
+            <div>
+                <label>ТИП</label>
+                <select [(ngModel)]="offer.type" class="form-control">
+                    <option>BUY</option>
+                    <option>SELL</option>
+                </select>
+            </div>
+            <div>
+                <label>ВАЛУТА</label>
+                <select [(ngModel)]="offer.name"  class="form-control">
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+            </div>
+            <div>
+                <label>Количество</label>
+                <input [(ngModel)]="offer.amount" class="form-control" type="number"/>
+            </div>
+            <div>
+                <label>Цена</label>
+                <input [(ngModel)]="offer.price" class="form-control" type="number" step="0.01"/>
+            </div>
+            <div>
+                <label>Общо</label>
+                <input disabled="true" [ngModel]="offer.amount*offer.price" class="form-control" type="text"/>
+            </div>
+            <button (click)="createOffer()" class="btn btn-info" style="margin-top: 3%;">Създай</button>
+            <div [hidden]="isValidOffer" class="alert alert-danger" style="margin-top:2%;">
+                <button (click)="isValidOffer=true" type="button" class="close">×</button>
+                Невалидна оферта!
+            </div>
+            <div [hidden]="isNotShowInvalidNumber" class="alert alert-danger" style="margin-top:2%;">
+                <button (click)="isNotShowInvalidNumber=true" type="button" class="close">×</button>
+                Цената и количеството са по-големи съответно от 0 и 1!
+            </div>
+            <div [hidden]="isNotShowingSuccess" class="alert alert-success" style="margin-top:2%;">
+                <button (click)="isNotShowingSuccess=true" class="close">×</button>
+                Успешен запис!
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Име</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Общо</th>
+                <th>Купи/Продай</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#o of offers">
+                    <td>{{o.type}}</td>
+                    <td>{{o.name}}</td>
+                    <td>{{o.amount}}</td>
+                    <td>{{o.price}}</td>
+                    <td>{{o.price*o.amount}}</td>
+                    <button (click)="executeOrder(o)" class="btn btn-info">Изпълни</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

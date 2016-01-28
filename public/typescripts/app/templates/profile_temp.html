@@ -1,0 +1,22 @@
+<form>
+    <div>
+        <div class="input-group" style="width: 70%">
+            <label>Име на компания</label>
+            <input disabled="true" [(ngModel)]="user.username" class="form-control" type="text" required/>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Име</th>
+                <th>Количество</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="warning" *ngFor="#item of user.portfolio">
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
