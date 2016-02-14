@@ -6,7 +6,7 @@ The idea is to simulate a currency trading platform. You can register,login, buy
 currency, create offers for currencies,view chart for the currency and history.
 
 ##Link
-[Tradeo](tradeo.herokuapp.com)
+[Tradeo](http://tradeo.herokuapp.com)
 
 ##Technologies:
 Node.js, Express, Angular2Beta, MongoDb, Mongoose, MongoLab, Heroku
