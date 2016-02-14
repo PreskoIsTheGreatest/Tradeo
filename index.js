@@ -22,11 +22,7 @@ passport.use(new Strategy(
                 console.log("in",2);
                 return cb(null, false);
             }
-            /*if (!bcrypt.compareSync(password, user.password)) {
-                return cb(null, false);
-            }*/
-            if (password!==user.password) {
-                console.log(password,user.password);
+            if (!bcrypt.compareSync(password, user.password)) {
                 return cb(null, false);
             }
             return cb(null, user);

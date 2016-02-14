@@ -2,10 +2,11 @@ module.exports = function (express, db) {
 
     var router = express.Router();
 
-    router.get('/all',
+    router.post('/all/:filters',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
-            db.offer.loadOffers((docs)=> {
+            var filters=JSON.parse(req.params.filters);
+            db.offer.loadOffers(req.user._id,filters,(docs)=> {
                 res.json(docs);
             })
         });
@@ -13,7 +14,15 @@ module.exports = function (express, db) {
     router.get('/user',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
-            db.offer.loadUserOffers(req.user.portfolio,(docs)=> {
+            db.offer.loadUserOffers(req.user._id,(docs)=> {
+                res.json(docs);
+            })
+        });
+
+    router.get('/history',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            db.offer.findUserHistory(req.user._id,(docs)=> {
                 res.json(docs);
             })
         });
@@ -63,6 +72,16 @@ module.exports = function (express, db) {
                 res.json(results);
             })
         });
+
+    router.post('/delete/:offer',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function(req,res){
+            var offer=JSON.parse(req.params.offer);
+            db.offer.deleteOffer(req.user._id,offer,()=>{
+                res.sendStatus(200);
+            })
+        }
+    );
 
     return router;
 };

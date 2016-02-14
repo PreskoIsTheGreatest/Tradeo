@@ -18,7 +18,7 @@ var OfferComponent = (function () {
         this.isNotShowingSuccess = true;
         this.isNotShowInvalidNumber = true;
         this.offer = new offer_1.Offer("BUY", "EUR", 0, 0);
-        this.loadOffers();
+        this.loadUserOffers();
     }
     OfferComponent.prototype.constructOffer = function (of) {
         if (of.type === "SELL") {
@@ -64,36 +64,28 @@ var OfferComponent = (function () {
         }).subscribe(function (res) {
             _this.isNotShowingSuccess = false;
             _this.offer = new offer_1.Offer("BUY", "EUR", 0, 0);
-            _this.loadOffers();
+            _this.loadUserOffers();
         }, function (err) {
             _this.isValidOffer = false;
             console.log(err);
-        });
-    };
-    OfferComponent.prototype.loadOffers = function () {
-        var _this = this;
-        this.http.get('/offer/all')
-            .subscribe(function (data) {
-            _this.offers = data.json();
-        });
-    };
-    OfferComponent.prototype.executeOrder = function (item) {
-        var _this = this;
-        var itemStr = JSON.stringify(item);
-        this.http.post('/offer/buy/' + itemStr, itemStr, {
-            headers: new http_1.Headers({
-                'Content-Type': 'application/json'
-            })
-        }).subscribe(function (res) {
-            _this.isNotShowingSuccess = false;
-            _this.loadOffers();
-        }, function (err) {
-            console.log(err);
-            _this.isValidOffer = false;
         });
     };
     OfferComponent.prototype.loadUserOffers = function () {
+        var _this = this;
         this.http.get('/offer/user').subscribe(function (data) {
+            _this.offers = data.json();
+        });
+    };
+    OfferComponent.prototype.deleteOffer = function (item) {
+        var _this = this;
+        var itemStr = JSON.stringify(item);
+        this.http.post('offer/delete/' + itemStr, itemStr, {
+            headers: new http_1.Headers({
+                'Content-Type': 'application/json'
+            })
+        }).subscribe(function () {
+            _this.loadUserOffers();
+            console.log("success");
         });
     };
     OfferComponent = __decorate([

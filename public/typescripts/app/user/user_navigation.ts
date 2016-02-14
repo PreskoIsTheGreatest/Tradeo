@@ -5,7 +5,9 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_BINDINGS,AsyncRoute} from 'angula
 import {ROUTER_PROVIDERS, APP_BASE_HREF, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {ProfileComponent} from './profile';
 import {OfferComponent} from './offer';
+import {OffersComponent} from './offers';
 import {ChartComponent} from './chart';
+import {HistoryComponent} from './history';
 
 declare var System:any;
 
@@ -24,10 +26,20 @@ declare var System:any;
         loader: ()=>System.import('./typescripts/app/user/offer').then(m=>m.OfferComponent),
         name: 'Offer'
     },
+    {
+        path: '/offers',
+        loader: ()=>System.import('./typescripts/app/user/offers').then(m=>m.OffersComponent),
+        name: 'Offers'
+    },
     new AsyncRoute({
         path: '/chart',
         loader: ()=>System.import('./typescripts/app/user/chart').then(m=>m.ChartComponent),
         name: 'Chart'
+    }),
+    new AsyncRoute({
+        path: '/history',
+        loader: ()=>System.import('./typescripts/app/user/history').then(m=>m.HistoryComponent),
+        name: 'History'
     })
 ])
 @View({

@@ -49,7 +49,7 @@
                 <th>Количество</th>
                 <th>Цена</th>
                 <th>Общо</th>
-                <th>Купи/Продай</th>
+                <th>Изтрий</th>
             </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
                     <td>{{o.amount}}</td>
                     <td>{{o.price}}</td>
                     <td>{{o.price*o.amount}}</td>
-                    <button (click)="executeOrder(o)" class="btn btn-info">Изпълни</button>
+                    <button (click)="deleteOffer(o)" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span></button>
                 </tr>
             </tbody>
         </table>

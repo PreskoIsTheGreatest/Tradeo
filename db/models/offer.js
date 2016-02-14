@@ -13,7 +13,8 @@ const OfferSchema = new Schema({
     geting:{name:String,amount:Number},
     give:{name:String,amount:Number},
     is_valid:Boolean,
-    executed: Date
+    executed: Date,
+    created:Date
 });
 OfferSchema.index({name:1});
 OfferSchema.index({executed:1});

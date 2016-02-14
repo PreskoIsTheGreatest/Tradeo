@@ -2,11 +2,12 @@
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+var bcrypt = require('bcrypt-nodejs');
 
 exports.registerUser=(userData,cb)=>{
     var user = new User({_id:null,
         username: userData.username,
-        password: userData.password,
+        password: bcrypt.hashSync(userData.password),
         portfolio: [{name:"USD",amount:10000},
                     {name:"EUR",amount:10000}
         ]});

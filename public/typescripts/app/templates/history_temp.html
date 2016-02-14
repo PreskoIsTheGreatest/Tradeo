@@ -1,0 +1,30 @@
+<form>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Име</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Общо</th>
+                <th>Създадена</th>
+                <th>Извършена</th>
+                <th>Валидна</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="#o of offers">
+                <td>{{o.type}}</td>
+                <td>{{o.name}}</td>
+                <td>{{o.amount}}</td>
+                <td>{{o.price}}</td>
+                <td>{{o.price*o.amount}}</td>
+                <td>{{o.created}}</td>
+                <td>{{o.executed}}</td>
+                <td>{{o.is_valid}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

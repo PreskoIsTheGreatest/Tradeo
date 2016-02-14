@@ -4,14 +4,16 @@ const mongoose = require('mongoose');
 const Offer = mongoose.model('Offer');
 const User = mongoose.model('User');
 
-exports.loadUserOffers = (offerIds, cb)=> {
-    Offer.find({_id: {$in: offerIds}, is_valid: false}, (err, docs)=> {
+exports.loadUserOffers = (user_id, cb)=> {
+    Offer.find({user_id: user_id, is_valid: true}, (err, docs)=> {
         cb(docs)
     })
 };
 
-exports.loadOffers = (cb)=> {
-    Offer.find({is_valid: true}, (err, docs)=> {
+exports.loadOffers = (user_id,filters,cb)=> {
+    filters.user_id={$ne:user_id};
+    filters.is_valid=true;
+    Offer.find(filters, (err, docs)=> {
         cb(docs)
     })
 };
@@ -25,6 +27,7 @@ exports.executeOffer = (user, offer, cb)=> {
         })
     })
 };
+
 function inValidateOffer(offerId, cb) {
     Offer.update({_id: offerId}, {$set: {is_valid: false, executed: new Date()}}, (err)=> {
         if (err) {
@@ -33,6 +36,7 @@ function inValidateOffer(offerId, cb) {
         cb();
     });
 }
+
 exports.createOffer = (offerData, cb)=> {
     var offer = constructOffer(offerData);
     offer.save().then(()=> {
@@ -50,6 +54,7 @@ function constructOffer(offerData) {
         user_id: offerData.userId,
         geting: offerData.get,
         give: offerData.give,
+        created:new Date(),
         is_valid: true
     });
     return offer;
@@ -71,19 +76,18 @@ exports.getQuotationGraphData = (filters, cb)=> {
     var groupPeriodObj;
     switch (parseInt(filters.period)) {
         case 1:
-            groupPeriodObj = {$hour: "$executed"};
+            groupPeriodObj = {$hour: "$created"};
             break;
         case 2:
-            groupPeriodObj = {$dayOfMonth: "$executed"};
+            groupPeriodObj = {$dayOfMonth: "$created"};
             break;
         case 3:
-            groupPeriodObj = {$week: "$executed"};
+            groupPeriodObj = {$week: "$created"};
             break;
         case 4:
-            groupPeriodObj = {$month: "$executed"};
+            groupPeriodObj = {$month: "$created"};
             break;
     }
-    console.log(filters);
     Offer.aggregate([
         {
             $match: {
@@ -109,6 +113,16 @@ exports.getQuotationGraphData = (filters, cb)=> {
         })
 };
 
-exports.getUserHistory = (userId, cb)=> {
+exports.deleteOffer=function(userId,offer,cb){
+    Offer.remove({_id:offer._id},()=>{
+        updateMoney(userId,offer.give,+1,()=>{
+            cb();
+        })
+    })
+};
 
+exports.findUserHistory=function(userId,cb){
+    Offer.find({user_id:userId}).sort({created:-1}).then((docs)=>{
+        cb(docs);
+    })
 };

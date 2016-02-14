@@ -19,7 +19,7 @@ export class OfferComponent {
 
     constructor(public http:Http) {
         this.offer = new Offer("BUY", `EUR`, 0,0);
-        this.loadOffers();
+        this.loadUserOffers();
     }
 
     private constructOffer(of){
@@ -66,38 +66,28 @@ export class OfferComponent {
         }).subscribe(res => {
             this.isNotShowingSuccess = false;
             this.offer = new Offer("BUY", "EUR", 0,0);
-            this.loadOffers();
+            this.loadUserOffers();
         }, err=> {
             this.isValidOffer=false;
             console.log(err);
-        });
-    }
-
-    loadOffers() {
-        this.http.get('/offer/all')
-            .subscribe(data => {
-                this.offers = data.json();
-            });
-    }
-
-    executeOrder(item){
-        var itemStr= JSON.stringify(item);
-        this.http.post('/offer/buy/' + itemStr, itemStr, {
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }).subscribe(res => {
-            this.isNotShowingSuccess = false;
-            this.loadOffers();
-        }, err=> {
-            console.log(err);
-            this.isValidOffer=false;
         });
     }
 
     loadUserOffers(){
         this.http.get('/offer/user').subscribe(data=>{
+            this.offers = data.json();
         })
     }
 
+    deleteOffer(item){
+        var itemStr= JSON.stringify(item);
+        this.http.post('offer/delete/'+itemStr,itemStr,{
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).subscribe(()=>{
+            this.loadUserOffers();
+            console.log("success");
+        })
+    }
 }

@@ -1,0 +1,47 @@
+<form>
+    <div>
+        <div class="input-group" style="width: 70%">
+            <div>
+                <label>ТИП</label>
+                <select [(ngModel)]="type" class="form-control">
+                    <option>-</option>
+                    <option>BUY</option>
+                    <option>SELL</option>
+                </select>
+            </div>
+            <div>
+                <label>ВАЛУТА</label>
+                <select [(ngModel)]="name"  class="form-control">
+                    <option>-</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+            </div>
+            <div>
+                <button (click)="loadOffers()" class="btn btn-info">Презареди</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Име</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Общо</th>
+                <th>Купи/Продай</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="#o of offers">
+                <td>{{o.type}}</td>
+                <td>{{o.name}}</td>
+                <td>{{o.amount}}</td>
+                <td>{{o.price}}</td>
+                <td>{{o.price*o.amount}}</td>
+                <button (click)="executeOrder(o)" class="btn btn-info">Изпълни</button>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

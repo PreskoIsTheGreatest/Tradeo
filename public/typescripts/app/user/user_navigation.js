@@ -31,10 +31,20 @@ var UserNavigation = (function () {
                 loader: function () { return System.import('./typescripts/app/user/offer').then(function (m) { return m.OfferComponent; }); },
                 name: 'Offer'
             },
+            {
+                path: '/offers',
+                loader: function () { return System.import('./typescripts/app/user/offers').then(function (m) { return m.OffersComponent; }); },
+                name: 'Offers'
+            },
             new router_1.AsyncRoute({
                 path: '/chart',
                 loader: function () { return System.import('./typescripts/app/user/chart').then(function (m) { return m.ChartComponent; }); },
                 name: 'Chart'
+            }),
+            new router_1.AsyncRoute({
+                path: '/history',
+                loader: function () { return System.import('./typescripts/app/user/history').then(function (m) { return m.HistoryComponent; }); },
+                name: 'History'
             })
         ]),
         core_1.View({

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-	"tsc": "tsc -p public",
-    "start": "node index"
+	"start": "node index",
+	"tsc": "tsc -p public"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
